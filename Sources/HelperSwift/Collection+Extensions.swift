@@ -1,6 +1,6 @@
 //
 //  Collection+Extensions.swift
-//  
+//
 //
 //  Created by Pavel Koyushev on 14.11.2023.
 //
@@ -20,5 +20,9 @@ public extension Collection {
             defer { start = end }
             return self[start..<end]
         }
+    }
+    
+    subscript (safe index: Self.Index) -> Iterator.Element? {
+        (startIndex ..< endIndex).contains(index) ? self[index] : nil
     }
 }
