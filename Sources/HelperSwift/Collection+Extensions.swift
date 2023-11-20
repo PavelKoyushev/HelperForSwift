@@ -26,3 +26,32 @@ public extension Collection {
         (startIndex ..< endIndex).contains(index) ? self[index] : nil
     }
 }
+
+public extension Array where Element: Equatable {
+    
+    @discardableResult
+    mutating func remove(element: Element) -> Index? {
+        guard let index = firstIndex(of: element) else { return nil }
+        remove(at: index)
+        return index
+    }
+    
+    @discardableResult
+    mutating func remove(elements: [Element]) -> [Index] {
+        elements.compactMap { remove(element: $0) }
+    }
+}
+
+public extension Array where Element: Hashable {
+    
+    mutating func unify() {
+        self = unified()
+    }
+}
+
+public extension Collection where Element: Hashable {
+    
+    func unified() -> [Element] {
+        Array(Set(self))
+    }
+}
