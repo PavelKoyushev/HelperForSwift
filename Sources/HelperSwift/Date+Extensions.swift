@@ -32,6 +32,14 @@ public extension Date {
     var year: Int {
         Calendar.current.component(.year, from: self)
     }
+    
+    var priorYearDate: Date {
+        Calendar.current.date(byAdding: .year, value: -1, to: self)!
+    }
+    
+    var priorYear: Int {
+        Calendar.current.component(.year, from: self) - 1
+    }
 }
 
 public extension Date {
